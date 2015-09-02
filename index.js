@@ -35,7 +35,8 @@ io.sockets.on('connection', function(socket) {
       text: tweet.text,
       name: tweet.user.screen_name,
       image: tweet.user.profile_image_url,
-      endereco: tweet.place.full_name + ', ' + tweet.place.country
+      lat: tweet.geo.coordinates[0],
+      lng: tweet.geo.coordinates[1]
     };
 
     io.sockets.emit('stream', tweetJSON);
