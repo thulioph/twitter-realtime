@@ -1,3 +1,4 @@
+var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
 var Twit = require('twit');
@@ -10,6 +11,8 @@ http.listen(3000, function(){
 app.get('/', function(req, res){
   res.sendfile('index.html');
 });
+
+app.use(express.static(__dirname + '/public'));
 
 
 // Twitter

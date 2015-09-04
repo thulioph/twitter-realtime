@@ -1,70 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Twitter + Socket.io + Google Maps API</title>
+  <meta charset="utf-8">
+  <title>Twitter + Socket.io + Leaflet API ⚡️</title>
 
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.4/leaflet.css" />
+  <!-- META TAGS -->
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="robots" content="all">
+  <meta name="author" content="Thulioph">
+  <meta name="rating" content="general">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="thulioph - Todos os direitos reservados">
 
-  <style> #map { height: 180px; } </style>
+  <!-- FACEBOOK  -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://thulioph.github.io/catrina">
+  <meta property="og:title" content="Twitter Real-time">
+  <meta property="og:image" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
+  <meta property="og:description" content="Twitter + Socket.io + Google Maps API ⚡️">
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" value="summary_large_image">
+  <meta name="twitter:card" value="summary">
+  <meta name="twitter:creator" value="@thulioph_">
+  <meta name="twitter:site" value="@thulioph_">
+  <meta name="twitter:title" content="Twitter Real-time">
+  <meta name="twitter:description" content="Twitter + Socket.io + Google Maps API ⚡️">
+  <meta name="twitter:image:src" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
+
+  <!-- APPLE TOUCH ICON -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon" href="touch-icon@2x.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon@2x.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-ipad@2x.png">
+
+  <!-- HUMANS -->
+  <link type="text/plain" rel="author" href="humans.txt" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.4/leaflet.css">
 </head>
-<body>
+<body ng-app="twRealtime">
 
-  <div id="map"></div>
+  <a id="fork-github" class="fork-github" href="https://github.com/thulioph/twitter-realtime" target="_blank">
+      <img src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+    </a>
+
+  <div ng-view=""></div>
   
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://cdn.leafletjs.com/leaflet-0.7.4/leaflet.js"></script>
 
-  <script>
-    var map, socket, markers, geocoder, myLatlng, mapOptions, infowindow, map, marcadorPersonalizado, styles, styledMap, notification, options;
+  <!-- Libs -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
 
-
-    // pega a localização do usuário
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(mapLeaflet, error);
-    } else {
-      console.log('not supported');
-    }
-
-    function mapLeaflet(position) {
-      var lat = position.coords.latitude,
-      lng = position.coords.longitude;
-
-      console.log(lat, lng);
-
-      map = L.map('map').setView([lat, lng], 13);
-
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        id: 'mapbox.streets'
-      }).addTo(map);
-
-      L.marker([lat, lng]).addTo(map).bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
-    };
-
-    function error(msg) {
-      console.log('Error: ', msg);
-    };
-
-    function updateMap(text, name, image, lat, lng) {
-      markers = new L.LayerGroup().addTo(map);
-      marker = L.marker([lat, lng]).addTo(markers).bindPopup(text).openPopup();;
-    };
-
-    socket = io();
-    socket.on('stream', function(tweetJSON){
-      var data = tweetJSON,
-          text = data.text,
-          name = data.name, 
-          image = data.image,
-          lat = data.lat, 
-          lng = data.lng;
-        
-        updateMap(text, name, image, lat, lng);
-    });
-  </script>
+  <!-- Angular -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/index.js"></script>
+  <script src="scripts/services/index.js"></script>
 </body>
 </html>
