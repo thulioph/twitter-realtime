@@ -8,10 +8,6 @@
  * Controller of the twRealtime
  */
 angular.module('twRealtime')
-  .controller('IndexCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('IndexCtrl', function ($scope) {
+    $scope.msg = 'Hello!';
   });
