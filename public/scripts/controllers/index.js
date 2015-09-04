@@ -10,6 +10,8 @@
 angular.module('twRealtime')
   .controller('IndexCtrl', ['$scope',  function ($scope) {
 
+    $scope.projectName = 'Twitter + Socket.io + Google Maps API ⚡️';
+
     var socket, geocoder, 
         myLatlng, mapOptions, infowindow, map, 
         marcadorPersonalizado, styles, styledMap, notification, options;

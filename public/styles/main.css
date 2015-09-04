@@ -23,6 +23,20 @@ body {
 }
 /* === */
 
+.header-primary {
+  padding: 30px 0;
+  text-align: center;
+  color: #343421;
+}
+
+.fork-github img {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
 /* Tweet list */
 .tweet-list {
   width: 30%;
@@ -31,7 +45,7 @@ body {
   max-height: 320px;
   overflow: auto;
   position: absolute;
-  top: 16%;
+  top: 27%;
   right: 2%;
   z-index: 999999;
   /*background-color: rgba(0,0,0,0.4);*/
@@ -63,7 +77,6 @@ body {
 li {
   list-style-type: none;
   padding: 10px 5px;
-  /*border-bottom: 1px solid #FED136;*/
 }
 
 .content {
@@ -81,7 +94,7 @@ li {
   position: absolute;
   z-index: 999;
   right: 4%;
-  top: 10%;
+  top: 20%;
 }
 
 .bird img {
@@ -102,3 +115,4 @@ li {
   font-weight: bold;
   color: #FFFFFF;
 }
+/* ==== */
