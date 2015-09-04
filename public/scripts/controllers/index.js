@@ -153,7 +153,6 @@ angular.module('twRealtime')
       console.log('tweetsArray.length ', tweetsArray.length);
     };
 
-    // socket.io();
     socket = io.connect();
 
     socket.on('stream', function(tweetJSON){
