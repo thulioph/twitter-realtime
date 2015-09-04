@@ -8,7 +8,7 @@
  * Controller of the twRealtime
  */
 angular.module('twRealtime')
-  .controller('IndexCtrl', ['$scope',  function ($scope) {
+  .controller('IndexCtrl', ['$scope', 'socket', function ($scope, socket) {
 
     $scope.projectName = 'Twitter + Socket.io + Google Maps API ⚡️';
 
