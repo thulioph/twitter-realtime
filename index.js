@@ -4,15 +4,9 @@ var http = require('http').Server(app);
 var Twit = require('twit');
 var io = require('socket.io')(http);
 
-// app.set('port', (process.env.PORT || 5000));
-
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
-
-// http.listen(3000, function(){
-//   console.log('listening on *:3000');
-// });
 
 app.get('/', function(req, res){
   res.sendfile('index.html');

@@ -99,6 +99,7 @@ angular.module('twRealtime')
     $scope.showMapTweet = function(text, name, image, endereco) {
 
       geocoder.geocode({'address': endereco}, function(results, status) {
+        console.log(results, status)
         if (status == google.maps.GeocoderStatus.OK) {
 
           console.log('latlng: ', results[0].geometry.location.G, results[0].geometry.location.K);
