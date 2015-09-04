@@ -1,3 +1,24 @@
-<div id="mapa"></div>
+<section class="wrapper-map">
 
-<!-- <ul id="tweet-list" class="tweet"></ul> -->
+  <figure class="bird">
+    <img src="images/tweet.svg" alt="Pássaro em cima de um galo">
+    <figcaption>#JSDaybr <span class="count">{{ tweetsArray.length }}</span></figcaption>
+  </figure>
+
+  <aside class="tweet-list">
+    <ul>
+      <li ng-repeat="tweet in tweetsArray">
+        <figure class="avatar-user">
+          <img src="{{ tweet.$index.image }}" alt="{{ tweet.name }}">
+        </figure>
+
+        <div class="content">
+          <h5>{{ tweet.name }}</h5>
+          <p>{{ tweet.text }}</p>
+        </div>
+      </li>
+    </ul>
+  </aside>
+  
+  <div id="map" class="map"></div>
+</section>

@@ -1,50 +1,104 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-family: "Lucida Console", Monaco, monospace;
-}
-
-#mapa {
-  width: 100%;
-  height: 220px;
-  border: 1px solid black;
-}
-
-.tweet {
-  width: 220px;
-  min-height: 60px;
-  height: auto;
   position: relative;
-  padding: 5px 6px;
+  height: 100%;
+  width: 100%;
+  padding: 0;
 }
 
-.tweet-item {
-  list-style-type: none;
+/* Map */
+.wrapper-map {
+  width: 100%;
+  height: 100%;
 }
 
-.tweet-link {
-  text-decoration: none;
-  display: block;
-  color: black;
+.map {
+  width: 100%;
+  height: 600px;
+}
+/* === */
+
+/* Tweet list */
+.tweet-list {
+  width: 30%;
+  height: auto;
+  min-height: 140px;
+  max-height: 320px;
+  overflow: auto;
+  position: absolute;
+  top: 16%;
+  right: 2%;
+  z-index: 999999;
+  /*background-color: rgba(0,0,0,0.4);*/
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
 }
 
-.tweet-link:hover {
-  background-color: #ccc;
-}
-
-figure {
+.avatar-user {
   width: 60px;
   height: 60px;
-  margin-right: 20px;
-  border-radius: 100%;
+  border: 1px solid #FED136;
   display: inline-block;
+  vertical-align: middle;
   overflow: hidden;
-  vertical-align: middle;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
 }
 
-figure img { width: 100%; }
+.avatar-user img {
+  width: 100%;
+}
 
-.text {
+li {
+  list-style-type: none;
+  padding: 10px 5px;
+  /*border-bottom: 1px solid #FED136;*/
+}
+
+.content {
   display: inline-block;
   vertical-align: middle;
+  color: #FED136;
+  font-size: 14px;
 }
 
-.text h4 {}
+.content h5 {
+  margin-bottom: 5px;
+}
+
+.bird {
+  position: absolute;
+  z-index: 999;
+  right: 4%;
+  top: 10%;
+}
+
+.bird img {
+  width: 50px;
+  position: relative;
+}
+
+.bird figcaption {
+  color: #FED136;
+  text-transform: uppercase;
+  font-size: 16px;
+  right: 150px;
+  top: -30px;
+  position: relative;
+}
+
+.count {
+  font-weight: bold;
+  color: #FFFFFF;
+}

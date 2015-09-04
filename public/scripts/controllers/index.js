@@ -30,11 +30,11 @@ angular.module('twRealtime')
         center: myLatlng,
         panControl: false,
         mapTypeControlOptions: {
-          mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+          mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_jsdaybr']
         }
       }
 
-      map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
+      map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
       marcadorPersonalizado = new google.maps.Marker({
         position: myLatlng,
@@ -54,10 +54,12 @@ angular.module('twRealtime')
       styles = [
         {
           stylers: [
-            { hue: "#41a7d5" },
-            { saturation: 60 },
-            { lightness: -20 },
-            { gamma: 1.51 }
+            { hue: "#ffff00" },
+            { "invert_lightness": true },
+            { "weight": 0.3 },
+            { saturation: -73 },
+            { lightness: 0 },
+            { gamma: 0 }
           ]
         },
         {
@@ -65,7 +67,7 @@ angular.module('twRealtime')
           elementType: "geometry",
           stylers: [
             { lightness: 100 },
-            { visibility: "simplified" }
+            { visibility: "on" }
           ]
         },
         {
@@ -75,12 +77,12 @@ angular.module('twRealtime')
       ];
 
       styledMap = new google.maps.StyledMapType(styles, {
-        name: "Mapa Style"
+        name: "Map JSDay BR"
       });
 
       // Aplicando as configurações do mapa
-      map.mapTypes.set('map_style', styledMap);
-      map.setMapTypeId('map_style');
+      map.mapTypes.set('map_jsdaybr', styledMap);
+      map.setMapTypeId('map_jsdaybr');
 
       geocoder = new google.maps.Geocoder();
     };
@@ -120,6 +122,7 @@ angular.module('twRealtime')
       });
 
       $scope.openNofify(name, text, image);
+      $scope.showTweet(name, text, image);
     };
 
     $scope.openNofify = function(title, body, icon) {
@@ -139,6 +142,15 @@ angular.module('twRealtime')
           }
         });
       }
+    };
+
+    $scope.showTweet = function(name, text, image) {
+      var tweetsArray, objArray;
+
+      tweetsArray = [{'name': name, 'text': text, 'image': image}];
+
+      console.log('tweetsArray ', tweetsArray);
+      console.log('tweetsArray.length ', tweetsArray.length);
     };
 
     // socket.io();
