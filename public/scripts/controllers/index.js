@@ -147,9 +147,12 @@ angular.module('twRealtime')
     };
 
     $scope.showTweet = function(name, text, image) {
-      var tweetsArray, objArray;
+      var tweetsArray, meuObjeto;
 
-      tweetsArray = [{'name': name, 'text': text, 'image': image}];
+      meuObjeto = {'name': name, 'text': text, 'image': image};
+      
+      tweetsArray = [];
+      tweetsArray.push(meuObjeto);
 
       console.log('tweetsArray ', tweetsArray);
       console.log('tweetsArray.length ', tweetsArray.length);
