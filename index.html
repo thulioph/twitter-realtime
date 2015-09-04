@@ -1,221 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Twitter + Socket.io + Google Maps API</title>
+  <meta charset="utf-8">
+  <title>Twitter + Socket.io + Google Maps API ⚡️</title>
 
-  <style>
-    body {
-      font-family: "Lucida Console", Monaco, monospace;
-    }
+  <!-- META TAGS -->
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="robots" content="all">
+  <meta name="author" content="Thulioph">
+  <meta name="rating" content="general">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="thulioph - Todos os direitos reservados">
 
-    #mapa {
-      width: 100%;
-      height: 220px;
-      border: 1px solid black;
-    }
+  <!-- FACEBOOK  -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://thulioph.github.io/catrina">
+  <meta property="og:title" content="Twitter Real-time">
+  <meta property="og:image" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
+  <meta property="og:description" content="Twitter + Socket.io + Google Maps API ⚡️">
 
-    .tweet {
-      width: 220px;
-      min-height: 60px;
-      height: auto;
-      position: relative;
-      padding: 5px 6px;
-    }
+  <!-- TWITTER -->
+  <meta name="twitter:card" value="summary_large_image">
+  <meta name="twitter:card" value="summary">
+  <meta name="twitter:creator" value="@thulioph_">
+  <meta name="twitter:site" value="@thulioph_">
+  <meta name="twitter:title" content="Twitter Real-time">
+  <meta name="twitter:description" content="Twitter + Socket.io + Google Maps API ⚡️">
+  <meta name="twitter:image:src" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
 
-    .tweet-item {
-      list-style-type: none;
-    }
+  <!-- APPLE TOUCH ICON -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon" href="touch-icon@2x.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon@2x.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-ipad@2x.png">
 
-    .tweet-link {
-      text-decoration: none;
-      display: block;
-      color: black;
-    }
+  <!-- HUMANS -->
+  <link type="text/plain" rel="author" href="humans.txt" />
 
-    .tweet-link:hover {
-      background-color: #ccc;
-    }
-
-    figure {
-      width: 60px;
-      height: 60px;
-      margin-right: 20px;
-      border-radius: 100%;
-      display: inline-block;
-      overflow: hidden;
-      vertical-align: middle;
-    }
-
-    figure img { width: 100%; }
-
-    .text {
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .text h4 {}
-  </style>
-
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
+<body ng-app="twRealtime">
 
-  <div id="mapa"></div>
+  <a id="fork-github" class="fork-github" href="https://github.com/thulioph/twitter-realtime" target="_blank">
+      <img src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+    </a>
 
-  <ul id="tweet-list" class="tweet"></ul>
+  <div ng-view=""></div>
   
   <script src="/socket.io/socket.io.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
   <script src="http://maps.googleapis.com/maps/api/js"></script>
 
-  <script>
-    var socket, geocoder, myLatlng, mapOptions, infowindow, map, marcadorPersonalizado, styles, styledMap, notification, options;
+  <!-- Libs -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
 
-    // pega a localização do usuário
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showMap, error);
-    } else {
-      console.log('not supported');
-    }
-
-    function error(msg) {
-      console.log('Error: ', msg);
-    };
-    // ====
-
-    // carrega o mapa sem pontos
-    function showMap(position) {
-      myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      
-      mapOptions = {
-        zoom: 11,
-        center: myLatlng,
-        panControl: false,
-        mapTypeControlOptions: {
-          mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-        }
-      }
-
-      map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
-
-      marcadorPersonalizado = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        icon: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-32.png',
-        title: 'Você está aqui!'
-      });
-
-      infowindow = new google.maps.InfoWindow({
-        content: 'Você está aqui!',
-        maxWidth: 700
-      });
-
-      infowindow.open(map, marcadorPersonalizado);
-
-      // Estilizando o mapa;
-      styles = [
-        {
-          stylers: [
-            { hue: "#41a7d5" },
-            { saturation: 60 },
-            { lightness: -20 },
-            { gamma: 1.51 }
-          ]
-        },
-        {
-          featureType: "road",
-          elementType: "geometry",
-          stylers: [
-            { lightness: 100 },
-            { visibility: "simplified" }
-          ]
-        },
-        {
-          featureType: "road",
-          elementType: "labels"
-        }
-      ];
-
-      styledMap = new google.maps.StyledMapType(styles, {
-        name: "Mapa Style"
-      });
-
-      // Aplicando as configurações do mapa
-      map.mapTypes.set('map_style', styledMap);
-      map.setMapTypeId('map_style');
-
-      geocoder = new google.maps.Geocoder();
-    };
-    // ====
-
-    // carrega o mapa em tempo real
-    function showMapTweet(text, name, image, endereco) {
-
-      geocoder.geocode({'address': endereco}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-
-          console.log('latlng: ', results[0].geometry.location.G, results[0].geometry.location.K);
-
-            marcadorPersonalizado = new google.maps.Marker({
-              position: new google.maps.LatLng(results[0].geometry.location.G, results[0].geometry.location.K),
-              map: map,
-              icon: image
-            });
-
-            marcadorPersonalizado.setMap(map);
-
-            infowindow = new google.maps.InfoWindow({
-              content: text,
-              maxWidth: 700
-            });
-
-            infowindow.open(map, marcadorPersonalizado);
-
-        } else {
-          alert('Geocoder falhou por conta de: ' + status);
-        }
-      });
-
-      openNofify(name, text, image);
-    };
-    // ====
-
-    // Cria a notificação com o tweet
-    function openNofify(title, body, icon) {
-      options = {
-        body: body,
-        icon: icon
-      };
-
-      if (!("Notification" in window)) {
-        console.log('Seu navegador não suporta notificações.');
-      } else if (Notification.permission === 'granted') {
-        notification = new Notification(title, options);
-      } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission(function(permission) {
-          if (permission === 'granted') {
-            notification = new Notification(title, options);
-          }
-        });
-      }
-    };
-    // ====
-
-    // Socket io
-    socket = io();
-
-    socket.on('stream', function(tweetJSON){
-      var data = tweetJSON,
-          text = data.text,
-          name = data.name, 
-          image = data.image,
-          endereco = data.endereco;
-
-        showMapTweet(text, name, image, endereco);
-
-        // $("#tweet-list").append("<li class='tweet-item'><a class='tweet-link' target='_blank' href='#'><figure><img src='" + image + "'/></figure><div class='text'><h4>" + name + "</h4><p>" + text + "</p></div></a></li>");
-    });
-    // ====
-  </script>
+  <!-- Angular -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/index.js"></script>
+  <script src="scripts/services/index.js"></script>
 </body>
 </html>
