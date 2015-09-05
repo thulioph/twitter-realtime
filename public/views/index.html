@@ -6,12 +6,12 @@
 
   <figure class="bird">
     <img src="images/tweet.svg" alt="Pássaro em cima de um galo">
-    <figcaption>#JSDaybr <span class="count">{{ tweetsArray.length }}</span></figcaption>
+    <figcaption>#JSDaybr <span class="count"></span></figcaption>
   </figure>
 
   <aside class="tweet-list">
     <ul>
-      <li ng-repeat="tweet in tweetsArray">
+      <li ng-repeat="tweet in feeds">>
         <figure class="avatar-user">
           <img src="{{ tweet.image }}" alt="{{ tweet.name }}">
         </figure>
@@ -25,4 +25,5 @@
   </aside>
   
   <div id="map" class="map"></div>
+
 </section>

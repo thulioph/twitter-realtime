@@ -2,30 +2,26 @@
 
 /**
  * @ngdoc service
- * @name twRealtime.indexService
+ * @name twRealtime.twitterService
  * @description
- * # indexService
+ * # twitterService
  * Service in the twRealtime.
  */
 angular.module('twRealtime')
-  .service('indexService', function ($http) {
+  .service('TwitterService', [function ($scope, socket) {
 
+    var socket = io.connect();
     var obj = {};
+    var feeds = [];
 
-    // /minha-saude
-    var cards = [];
+    obj.getFeeds = function(callback) {
 
-    obj.getCards = function(callback) {
-      $http.get('../../assets/cards.json')
-        .success(function(data) {
-          cards = data;
-          console.log('Success getCards: ', cards);
-          callback(data);
-        }).error(function(error) {
-          console.log('Error getCards: ', error);
-        })
+      socket.on('stream', function(tweetJSON){
+        feeds = tweetJSON;
+        callback(tweetJSON)
+      });
+      
     };
-    // ====
 
     return obj;
-  });
+  }]);
