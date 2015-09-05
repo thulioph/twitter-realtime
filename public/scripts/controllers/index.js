@@ -8,9 +8,14 @@
  * Controller of the twRealtime
  */
 angular.module('twRealtime')
-  .controller('IndexCtrl', ['$scope',  function ($scope) {
+  .controller('IndexCtrl', ['$scope', 'TwitterService', function ($scope, TwitterService) {
 
     $scope.projectName = 'Twitter + Socket.io + Google Maps API ⚡️';
+
+    TwitterService.getFeeds(function(data) {
+      $scope.showTweets(data.text, data.name, data.image);
+      $scope.showMapTweet(data.text, data.name, data.image, data.endereco);
+    });
 
     var socket, geocoder, 
         myLatlng, mapOptions, infowindow, map, 
@@ -20,7 +25,7 @@ angular.module('twRealtime')
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition($scope.showMap, $scope.errorGeolocation);
       } else {
-        console.log('not supported');
+        alert('Seu navegador não suporta geolocation');
       }
     };
 
@@ -90,19 +95,15 @@ angular.module('twRealtime')
     };
 
     $scope.errorGeolocation = function(msg) {
-      console.log('Error, geolocation: ', msg);
+      alert('Ocorreu um erro na geolocalização: ', msg);
     };
 
-    // pega a localização do usuário e mostra no mapa
     $scope.geolocation();
 
     $scope.showMapTweet = function(text, name, image, endereco) {
 
       geocoder.geocode({'address': endereco}, function(results, status) {
-        console.log(results, status)
         if (status == google.maps.GeocoderStatus.OK) {
-
-          console.log('latlng: ', results[0].geometry.location.G, results[0].geometry.location.K);
 
             marcadorPersonalizado = new google.maps.Marker({
               position: new google.maps.LatLng(results[0].geometry.location.G, results[0].geometry.location.K),
@@ -125,7 +126,6 @@ angular.module('twRealtime')
       });
 
       $scope.openNofify(name, text, image);
-      $scope.showTweet(name, text, image);
     };
 
     $scope.openNofify = function(title, body, icon) {
@@ -135,7 +135,7 @@ angular.module('twRealtime')
       };
 
       if (!("Notification" in window)) {
-        console.log('Seu navegador não suporta notificações.');
+        alert('Seu navegador não suporta notificações.');
       } else if (Notification.permission === 'granted') {
         notification = new Notification(title, options);
       } else if (Notification.permission !== 'denied') {
@@ -147,28 +147,16 @@ angular.module('twRealtime')
       }
     };
 
-    $scope.showTweet = function(name, text, image) {
-      var tweetsArray, meuObjeto;
+    $scope.showTweets = function(text, name, image) {
+      var data = {
+        text: text,
+        name: name, 
+        image: image
+      }
 
-      meuObjeto = {'name': name, 'text': text, 'image': image};
-      
-      tweetsArray = [];
-      tweetsArray.push(meuObjeto);
+      $scope.feeds = data;
 
-      console.log('tweetsArray ', tweetsArray);
-      console.log('tweetsArray.length ', tweetsArray.length);
+      console.log('$scope.feeds -> ', $scope.feeds);
     };
-
-    socket = io.connect();
-
-    socket.on('stream', function(tweetJSON){
-      var data = tweetJSON,
-          text = data.text,
-          name = data.name, 
-          image = data.image,
-          endereco = data.endereco;
-
-        $scope.showMapTweet(text, name, image, endereco);
-    });
 
   }]);

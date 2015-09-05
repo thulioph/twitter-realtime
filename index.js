@@ -42,6 +42,7 @@ io.sockets.on('connection', function(socket) {
     };
 
     io.sockets.emit('stream', tweetJSON);
+    
     console.log(tweet);
     console.log(tweetJSON);
   });
