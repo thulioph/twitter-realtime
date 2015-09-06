@@ -18,32 +18,29 @@
 
   <!-- FACEBOOK  -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="http://thulioph.github.io/catrina">
-  <meta property="og:title" content="Twitter Real-time">
-  <meta property="og:image" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
-  <meta property="og:description" content="Twitter + Socket.io + Google Maps API ⚡️">
+  <meta property="og:url" content="http://thulioph.github.io/twitter-realtime">
+  <meta property="og:title" content="Twitter + Socket.io + Google Maps API ⚡️">
+  <meta property="og:image" content="https://github.com/thulioph/twitter-realtime/blob/gh-pages/example.png">
+  <meta property="og:description" content="Open-source real-time tweets with your location.">
 
   <!-- TWITTER -->
   <meta name="twitter:card" value="summary_large_image">
   <meta name="twitter:card" value="summary">
   <meta name="twitter:creator" value="@thulioph_">
   <meta name="twitter:site" value="@thulioph_">
-  <meta name="twitter:title" content="Twitter Real-time">
-  <meta name="twitter:description" content="Twitter + Socket.io + Google Maps API ⚡️">
-  <meta name="twitter:image:src" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
+  <meta name="twitter:title" content="Twitter + Socket.io + Google Maps API ⚡️">
+  <meta name="twitter:description" content="Open-source real-time tweets with your location.">
+  <meta name="twitter:image:src" content="https://github.com/thulioph/twitter-realtime/blob/gh-pages/example.png">
 
   <!-- APPLE TOUCH ICON -->
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="apple-touch-icon" href="touch-icon@2x.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="images/touch-icon-ipad.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon@2x.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-ipad@2x.png">
-
-  <!-- HUMANS -->
-  <link type="text/plain" rel="author" href="humans.txt" />
+  <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
+  <link rel="apple-touch-icon" href="public/images/touch-icon@2x.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="public/images/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="public/images/touch-icon@2x.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="public/images/touch-icon-ipad@2x.png">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="public/styles/main.css">
 </head>
 <body ng-app="twRealtime">
 
@@ -57,15 +54,15 @@
   <script src="http://maps.googleapis.com/maps/api/js"></script>
 
   <!-- Libs -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="public/bower_components/angular/angular.min.js"></script>
+  <script src="public/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="public/bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="public/bower_components/angular-route/angular-route.min.js"></script>
 
   <!-- Angular -->
-  <script src="scripts/app.js"></script>
-  <script src="scripts/services/index.js"></script>
-  <script src="scripts/controllers/index.js"></script>
+  <script src="public/scripts/app.js"></script>
+  <script src="public/scripts/services/index.js"></script>
+  <script src="public/scripts/controllers/index.js"></script>
 
   <!-- Twitter button -->
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
