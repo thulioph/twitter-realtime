@@ -1,14 +1,14 @@
-[![Code Climate](https://codeclimate.com/github/thulioph/twitter-realtime/badges/gpa.svg)](https://codeclimate.com/github/thulioph/twitter-realtime)
-
 ## Twitter Realtime
 
 Twitter API + Socket.io + Google Maps API + Notify = Real-time :zap:
 
+![exemplo](example.png "Exemplo da Aplicação rodando")
+
 ## Como funciona?
 
-O intúito é mostrar no mapa o local de um determinado tweet com a hashtag que está sendo monitorada. Se você quer ver como funciona, basta tuitar qualquer coisa contendo a hashtag **#catrina** e na hora que for tuitar compartilhar a sua localização.
+A brincadeira está em mostrar no mapa o local de um determinado _tweet_ com a hashtag que está sendo monitorada. Se você quer ver como funciona, basta tuitar qualquer coisa contendo a hashtag **#JSDayBR** e na hora que for tuitar compartilhar a sua localização.
 
-> para funcionar perfeitamente a localização é essencial. 
+> Para seu _tweet_ aparecer no mapa a localização é essencial. 
 
 ## Testando local
 
