@@ -17,7 +17,7 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/index.html',
+        templateUrl: 'public/views/index.html',
         controller: 'IndexCtrl',
         controllerAs: 'index'
       })
