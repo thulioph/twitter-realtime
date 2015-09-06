@@ -16,9 +16,9 @@ angular.module('twRealtime')
     TwitterService.getFeeds(function(data) {
       $scope.showTweets(data.text, data.name, data.image);
 
+      // se o tweet tiver localização
       if(data.endereco)
         $scope.showMapTweet(data.text, data.name, data.image, data.endereco);
-      // $scope.showMapTweet(data.text, data.name, data.image, data.endereco);
     });
 
     var socket, geocoder, 
@@ -158,13 +158,10 @@ angular.module('twRealtime')
         image: image
       }
 
+      // força a renderização da view
       $scope.$apply(function() {
         $scope.feeds.push(data);
-
-        console.log('$scope.feeds -> ', $scope.feeds);
       });
-
-      // $scope.feeds = data;
 
     };
 

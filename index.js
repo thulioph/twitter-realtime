@@ -33,13 +33,6 @@ io.sockets.on('connection', function(socket) {
   var stream = T.stream('statuses/filter', { track: watchList });
 
   stream.on('tweet', function(tweet) {
-    
-    // var tweetJSON = {
-    //   text: tweet.text,
-    //   name: tweet.user.screen_name,
-    //   image: tweet.user.profile_image_url,
-    //   endereco: tweet.place.full_name + ', ' + tweet.place.country
-    // };
 
     var tweetJSON = {
       text: tweet.text,
@@ -47,6 +40,7 @@ io.sockets.on('connection', function(socket) {
       image: tweet.user.profile_image_url
     };
 
+    // se o tweet tiver localização
     if(tweet.place)
       tweetJSON.endereco = tweet.place.full_name + ', ' + tweet.place.country;
 
