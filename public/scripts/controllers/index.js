@@ -10,7 +10,8 @@
 angular.module('twRealtime')
   .controller('IndexCtrl', ['$scope', 'TwitterService', function ($scope, TwitterService) {
 
-    $scope.projectName = 'Twitter + Socket.io + Google Maps API ⚡️';
+    $scope.projectName = 'Twitter + Socket.io + Google Maps API';
+    $scope.description = 'Open-source real-time tweets with your location';
     $scope.feeds = [];
 
     TwitterService.getFeeds(function(data) {
@@ -37,7 +38,7 @@ angular.module('twRealtime')
       myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       
       mapOptions = {
-        zoom: 11,
+        zoom: 13,
         center: myLatlng,
         panControl: false,
         mapTypeControlOptions: {
@@ -65,25 +66,44 @@ angular.module('twRealtime')
       styles = [
         {
           stylers: [
-            { hue: "#ffff00" },
-            { "invert_lightness": true },
+            { "invert_lightness": false },
             { "weight": 0.3 },
-            { saturation: -73 },
             { lightness: 0 },
             { gamma: 0 }
           ]
         },
         {
-          featureType: "road",
-          elementType: "geometry",
-          stylers: [
-            { lightness: 100 },
-            { visibility: "on" }
+          "elementType": "geometry.stroke",
+          "stylers": [
+            { "lightness": -29 },
+            { "visibility": "on" },
+            { "saturation": 1 },
+            { "invert_lightness": true },
+            { "hue": "#eeff00" },
+            { "color": "#fbbc05" }
+          ]
+        },
+        {
+          "elementType": "labels.text",
+          "stylers": [
+            { "visibility": "on" },
+            { "color": "#4581F2" },
+            { "weight": 0.3 }
+          ]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [
+            { "weight": 0.3 },
+            { "visibility": "off" }
           ]
         },
         {
           featureType: "road",
-          elementType: "labels"
+          elementType: "labels",
+          stylers: [
+            { "visibility": "simplified" }
+          ]
         }
       ];
 
@@ -162,7 +182,6 @@ angular.module('twRealtime')
       $scope.$apply(function() {
         $scope.feeds.push(data);
       });
-
     };
 
   }]);

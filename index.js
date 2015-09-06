@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 // Twitter
-var watchList = ['#catrina'];
+var watchList = ['#JSDayBR', '#jsdaybr', '#JSDAYBR'];
 
 var T = new Twit({
   consumer_key: 'z4ebhQjySYZcu5aIHUqKgPJiZ',

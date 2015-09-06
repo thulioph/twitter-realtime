@@ -2,28 +2,36 @@
 
   <header class="header-primary">
     <h1>{{ projectName }}</h1>
+    <h3>{{ description }}</h3>
   </header>
 
-  <figure class="bird">
-    <img src="images/tweet.svg" alt="Pássaro em cima de um galo">
-    <figcaption>#JSDaybr <span class="count"></span></figcaption>
-  </figure>
+  <main id="main" class="main">
+    <aside class="tweet-list">
+      <header>#JSDayBR <span>{{ feeds.length }}</span></header>
 
-  <aside class="tweet-list">
+      <ul>
+        <li ng-repeat="tweet in feeds">
+          <figure class="avatar-user">
+            <img src="{{ tweet.image }}" alt="{{ tweet.name }}">
+          </figure>
+
+          <div class="content">
+            <h5>@{{ tweet.name }}</h5>
+            <p>{{ tweet.text }}</p>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <div id="map" class="map"></div>
+  </main>
+
+  <aside class="share">
     <ul>
-      <li ng-repeat="tweet in feeds">
-        <figure class="avatar-user">
-          <img src="{{ tweet.image }}" alt="{{ tweet.name }}">
-        </figure>
-
-        <div class="content">
-          <h5>{{ tweet.name }}</h5>
-          <p>{{ tweet.text }}</p>
-        </div>
-      </li>
+      <li><iframe src="https://ghbtns.com/github-btn.html?user=thulioph&repo=twitter-realtime&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe></li>
+      <li><iframe src="https://ghbtns.com/github-btn.html?user=thulioph&repo=twitter-realtime&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe></li>
+      <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://github.com/thulioph/twitter-realtime" data-text="Twitter + Socket.io + Google Maps = Real-time" data-size="large" data-hashtags="JSDayBR">Tweet</a></li>
     </ul>
   </aside>
-  
-  <div id="map" class="map"></div>
 
 </section>
