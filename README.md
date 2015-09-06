@@ -28,6 +28,11 @@ node index.js
 
 O servidor irá rodar em: `http://localhost:3000/`
 
+## Outras engines
+
+Foi adicionado ao projeto o [Leaflet](http://leafletjs.com/) como engine alternativa para o Google Maps, você pode conferir o exemplo funcionando [nesta branch](https://github.com/thulioph/twitter-realtime/tree/leaflet-js).
+
+
 ## License
 
 [MIT License](http://thulioph.mit-license.org/) © thulioph
