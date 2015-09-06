@@ -10,7 +10,8 @@
 angular.module('twRealtime')
   .controller('IndexCtrl', ['$scope',  function ($scope) {
 
-    $scope.projectName = 'Twitter + Socket.io + Leaflet ⚡️';
+    $scope.projectName = 'Twitter + Socket.io + Leaflet API ⚡️';
+    $scope.description = 'Open-source real-time tweets with your location';
 
     var map, socket, markers, marker;
 
@@ -18,15 +19,13 @@ angular.module('twRealtime')
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition($scope.mapLeaFlet, $scope.errorGeolocation);
       } else {
-        console.log('not supported');
+        alert('not supported');
       }
     };
 
     $scope.mapLeaFlet = function(position) {
       var lat = position.coords.latitude,
           lng = position.coords.longitude;
-
-      console.log(lat, lng);
 
       map = L.map('map').setView([lat, lng], 13);
 
@@ -44,7 +43,7 @@ angular.module('twRealtime')
     $scope.geolocation();
 
     $scope.errorGeolocation = function(msg) {
-      console.log('Error, geolocation: ', msg);
+      alert('Error, geolocation: ', msg);
     };
 
     $scope.updateMap = function(text, lat, lng) {

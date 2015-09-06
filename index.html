@@ -21,7 +21,7 @@
   <meta property="og:url" content="http://thulioph.github.io/catrina">
   <meta property="og:title" content="Twitter Real-time">
   <meta property="og:image" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
-  <meta property="og:description" content="Twitter + Socket.io + Google Maps API ⚡️">
+  <meta property="og:description" content="Twitter + Socket.io + Leaflet API ⚡️">
 
   <!-- TWITTER -->
   <meta name="twitter:card" value="summary_large_image">
@@ -29,7 +29,7 @@
   <meta name="twitter:creator" value="@thulioph_">
   <meta name="twitter:site" value="@thulioph_">
   <meta name="twitter:title" content="Twitter Real-time">
-  <meta name="twitter:description" content="Twitter + Socket.io + Google Maps API ⚡️">
+  <meta name="twitter:description" content="Twitter + Socket.io + Leaflet API ⚡️">
   <meta name="twitter:image:src" content="https://github.com/thulioph/catrina/blob/gh-pages/dist/images/og-facebook.png">
 
   <!-- APPLE TOUCH ICON -->
@@ -65,7 +65,10 @@
 
   <!-- Angular -->
   <script src="scripts/app.js"></script>
-  <script src="scripts/controllers/index.js"></script>
   <script src="scripts/services/index.js"></script>
+  <script src="scripts/controllers/index.js"></script>
+
+  <!-- Twitter button -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </body>
 </html>
