@@ -11,10 +11,14 @@ angular.module('twRealtime')
   .controller('IndexCtrl', ['$scope', 'TwitterService', function ($scope, TwitterService) {
 
     $scope.projectName = 'Twitter + Socket.io + Google Maps API ⚡️';
+    $scope.feeds = [];
 
     TwitterService.getFeeds(function(data) {
       $scope.showTweets(data.text, data.name, data.image);
-      $scope.showMapTweet(data.text, data.name, data.image, data.endereco);
+
+      if(data.endereco)
+        $scope.showMapTweet(data.text, data.name, data.image, data.endereco);
+      // $scope.showMapTweet(data.text, data.name, data.image, data.endereco);
     });
 
     var socket, geocoder, 
@@ -154,9 +158,14 @@ angular.module('twRealtime')
         image: image
       }
 
-      $scope.feeds = data;
+      $scope.$apply(function() {
+        $scope.feeds.push(data);
 
-      console.log('$scope.feeds -> ', $scope.feeds);
+        console.log('$scope.feeds -> ', $scope.feeds);
+      });
+
+      // $scope.feeds = data;
+
     };
 
   }]);

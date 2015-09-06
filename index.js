@@ -34,12 +34,21 @@ io.sockets.on('connection', function(socket) {
 
   stream.on('tweet', function(tweet) {
     
+    // var tweetJSON = {
+    //   text: tweet.text,
+    //   name: tweet.user.screen_name,
+    //   image: tweet.user.profile_image_url,
+    //   endereco: tweet.place.full_name + ', ' + tweet.place.country
+    // };
+
     var tweetJSON = {
       text: tweet.text,
       name: tweet.user.screen_name,
-      image: tweet.user.profile_image_url,
-      endereco: tweet.place.full_name + ', ' + tweet.place.country
+      image: tweet.user.profile_image_url
     };
+
+    if(tweet.place)
+      tweetJSON.endereco = tweet.place.full_name + ', ' + tweet.place.country;
 
     io.sockets.emit('stream', tweetJSON);
     
