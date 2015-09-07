@@ -41,6 +41,7 @@ angular.module('twRealtime')
         zoom: 13,
         center: myLatlng,
         panControl: false,
+        scrollwheel: false,
         mapTypeControlOptions: {
           mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_jsdaybr']
         }
