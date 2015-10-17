@@ -6,7 +6,7 @@ Twitter API + Socket.io + Google Maps API + Notify = Real-time :zap:
 
 ## Como funciona?
 
-A brincadeira está em mostrar no mapa o local de um determinado _tweet_ com a hashtag que está sendo monitorada. Se você quer ver como funciona, basta tuitar qualquer coisa contendo a hashtag **#JSDayBR** e na hora que for tuitar compartilhar a sua localização.
+A brincadeira está em mostrar no mapa o local de um determinado _tweet_ com a hashtag que está sendo monitorada. Se você quer ver como funciona, basta tuitar qualquer coisa contendo a hashtag **#Devfestne2015** e na hora que for tuitar compartilhar a sua localização.
 
 > Para seu _tweet_ aparecer no mapa a localização é essencial. 
 
