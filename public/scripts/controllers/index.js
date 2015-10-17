@@ -43,7 +43,7 @@ angular.module('twRealtime')
         panControl: false,
         scrollwheel: false,
         mapTypeControlOptions: {
-          mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_jsdaybr']
+          mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_devfestne']
         }
       }
 
@@ -109,12 +109,12 @@ angular.module('twRealtime')
       ];
 
       styledMap = new google.maps.StyledMapType(styles, {
-        name: "Map JSDay BR"
+        name: "Map Devfestne 2015"
       });
 
       // Aplicando as configurações do mapa
-      map.mapTypes.set('map_jsdaybr', styledMap);
-      map.setMapTypeId('map_jsdaybr');
+      map.mapTypes.set('map_devfestne', styledMap);
+      map.setMapTypeId('map_devfestne');
 
       geocoder = new google.maps.Geocoder();
     };
