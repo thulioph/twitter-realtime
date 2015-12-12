@@ -109,7 +109,7 @@ angular.module('twRealtime')
       ];
 
       styledMap = new google.maps.StyledMapType(styles, {
-        name: "Map Devfestne 2015"
+        name: "TwitterRealtime"
       });
 
       // Aplicando as configurações do mapa
