@@ -145,12 +145,14 @@ angular.module('twRealtime')
 
             infowindow.open(map, marcadorPersonalizado);
 
+            map.setCenter(results[0].geometry.location.G, results[0].geometry.location.K);
+
         } else {
           alert('Geocoder falhou por conta de: ' + status);
         }
       });
 
-      $scope.openNofify(name, text, image);
+      // $scope.openNofify(name, text, image);
     };
 
     $scope.openNofify = function(title, body, icon) {
@@ -175,7 +177,7 @@ angular.module('twRealtime')
     $scope.showTweets = function(text, name, image) {
       var data = {
         text: text,
-        name: name, 
+        name: name,
         image: image
       }
 
