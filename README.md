@@ -1,5 +1,7 @@
 ## Twitter Realtime
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d2fd36a59844c47a7d8664a64a49f02)](https://www.codacy.com/app/thulioph/twitter-realtime?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=thulioph/twitter-realtime&amp;utm_campaign=Badge_Grade)
+
 Twitter API + Socket.io + Google Maps API + Notify = Real-time :zap:
 
 ![exemplo](example.png "Exemplo da Aplicação rodando")
