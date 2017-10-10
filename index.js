@@ -18,10 +18,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Twitter
 var watchList = [
-  "#jsdayrec", 
-  "#jsdayrecife", 
-  "#jsday", 
-  "#TwitterRealtime"
+  "#pybr13"
 ];
 
 var T = new Twit({
