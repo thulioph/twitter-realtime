@@ -6,16 +6,13 @@ var Twit = require("twit");
 var io = require("socket.io")(http);
 
 // Server
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
+http.listen(process.env.PORT || 5000);
+
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
   res.sendfile('index.html');
 });
-
-app.use(express.static(__dirname + '/public'));
-
 
 // Twitter
 var watchList = [
