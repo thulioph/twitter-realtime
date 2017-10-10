@@ -1,10 +1,11 @@
 ## Twitter Realtime
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d2fd36a59844c47a7d8664a64a49f02)](https://www.codacy.com/app/thulioph/twitter-realtime?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=thulioph/twitter-realtime&amp;utm_campaign=Badge_Grade)
-
-Twitter API + Socket.io + Google Maps API + Notify = Real-time :zap:
+Twitter API + Socket.io + Google Maps API.
 
 ![exemplo](example.png "Exemplo da Aplicação rodando")
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d2fd36a59844c47a7d8664a64a49f02)](https://www.codacy.com/app/thulioph/twitter-realtime?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=thulioph/twitter-realtime&amp;utm_campaign=Badge_Grade)
+
 
 ## Como funciona?
 
@@ -12,7 +13,7 @@ A brincadeira está em mostrar no mapa o local de um determinado _tweet_ com a h
 
 > Para seu _tweet_ aparecer no mapa a localização é essencial. 
 
-## Testando local
+## Setup
 
 É necessário que você tenha instalado [Socket.io](http://socket.io/) e [Node.js](https://nodejs.org/en/) para rodar o projeto.
 
@@ -28,7 +29,7 @@ npm install
 node index.js
 ```
 
-O servidor irá rodar em: `http://localhost:3000/`
+O servidor irá rodar em: `http://localhost:5000`
 
 ## Outras engines
 
