@@ -1,47 +1,3 @@
-/* 
-  Author Styles
-  @thulioph_
- */
-
-@font-face {
-    font-family: 'ubuntubold';
-    src: url('../fonts/ubuntu-b-webfont.eot');
-    src: url('../fonts/ubuntu-b-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/ubuntu-b-webfont.woff2') format('woff2'),
-         url('../fonts/ubuntu-b-webfont.woff') format('woff'),
-         url('../fonts/ubuntu-b-webfont.ttf') format('truetype'),
-         url('../fonts/ubuntu-b-webfont.svg#ubuntubold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'ubuntulight';
-    src: url('../fonts/ubuntu-l-webfont.eot');
-    src: url('../fonts/ubuntu-l-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/ubuntu-l-webfont.woff2') format('woff2'),
-         url('../fonts/ubuntu-l-webfont.woff') format('woff'),
-         url('../fonts/ubuntu-l-webfont.ttf') format('truetype'),
-         url('../fonts/ubuntu-l-webfont.svg#ubuntulight') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'ubunturegular';
-    src: url('../fonts/ubuntu-r-webfont.eot');
-    src: url('../fonts/ubuntu-r-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/ubuntu-r-webfont.woff2') format('woff2'),
-         url('../fonts/ubuntu-r-webfont.woff') format('woff'),
-         url('../fonts/ubuntu-r-webfont.ttf') format('truetype'),
-         url('../fonts/ubuntu-r-webfont.svg#ubunturegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -52,6 +8,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: #F7F7F7;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .fork-github img {
@@ -69,7 +26,7 @@ body {
 }
 
 .header-primary h1 {
-  font-family: ubuntubold;
+  font-weight: 700;
   color: #FFFFFF;
   font-size: 45px;
   text-align: center;
@@ -77,7 +34,7 @@ body {
 }
 
 .header-primary h3 {
-  font-family: ubuntulight;
+  font-weight: 300;
   color: #FFFFFF;
   font-size: 25px;
   text-align: center;
@@ -132,7 +89,7 @@ body {
   text-align: left;
   position: relative;
   font-size: 18px;
-  font-family: ubunturegular;
+  font-weight: 400;
   padding: 10px 20px;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
