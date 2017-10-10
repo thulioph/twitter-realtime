@@ -16,7 +16,7 @@ app.get('/', function(req, res){
 
 // Twitter
 var watchList = [
-  "#pybr13"
+  "#TwitterRealtime"
 ];
 
 var T = new Twit({
