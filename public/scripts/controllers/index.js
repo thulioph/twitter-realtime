@@ -1,36 +1,27 @@
-'use strict';
+(function() {
+  "use strict";
 
-/**
- * @ngdoc function
- * @name twRealtime.controller:IndexCtrl
- * @description
- * # IndexCtrl
- * Controller of the twRealtime
- */
-angular.module('twRealtime')
-  .controller('IndexCtrl', ['$scope', 'TwitterService', function ($scope, TwitterService) {
-
-    $scope.projectName = 'Twitter + Socket.io + Google Maps API';
-    $scope.description = 'Open-source real-time tweets with your location';
+  function IndexCtrl($scope, TwitterService) {
+    $scope.projectName = "Twitter + Socket.io + Google Maps API";
+    $scope.description = "Open-source real-time tweets with your location";
     $scope.feeds = [];
 
     TwitterService.getFeeds(function(data) {
       $scope.showTweets(data.text, data.name, data.image);
 
       // se o tweet tiver localização
-      if(data.endereco)
+      if(data.endereco) {
         $scope.showMapTweet(data.text, data.name, data.image, data.endereco);
+      }
     });
 
-    var socket, geocoder, 
-        myLatlng, mapOptions, infowindow, map, 
-        marcadorPersonalizado, styles, styledMap, notification, options;
+    var socket, geocoder, myLatlng, mapOptions, infowindow, map, marcadorPersonalizado, styles, styledMap, notification, options;
 
     $scope.geolocation = function() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition($scope.showMap, $scope.errorGeolocation);
       } else {
-        alert('Seu navegador não suporta geolocation');
+        alert("Seu navegador não suporta geolocation");
       }
     };
 
@@ -43,7 +34,7 @@ angular.module('twRealtime')
         panControl: false,
         scrollwheel: false,
         mapTypeControlOptions: {
-          mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_devfestne']
+          mapTypeIds: [google.maps.MapTypeId.ROADMAP, "map_devfestne"]
         }
       }
 
@@ -52,12 +43,12 @@ angular.module('twRealtime')
       marcadorPersonalizado = new google.maps.Marker({
         position: myLatlng,
         map: map,
-        icon: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-32.png',
-        title: 'Você está aqui!'
+        icon: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-32.png",
+        title: "Você está aqui!"
       });
 
       infowindow = new google.maps.InfoWindow({
-        content: 'Você está aqui!',
+        content: "Você está aqui!",
         maxWidth: 700
       });
 
@@ -113,21 +104,21 @@ angular.module('twRealtime')
       });
 
       // Aplicando as configurações do mapa
-      map.mapTypes.set('map_devfestne', styledMap);
-      map.setMapTypeId('map_devfestne');
+      map.mapTypes.set("map_devfestne", styledMap);
+      map.setMapTypeId("map_devfestne");
 
       geocoder = new google.maps.Geocoder();
     };
 
     $scope.errorGeolocation = function(msg) {
-      alert('Ocorreu um erro na geolocalização: ', msg);
+      alert("Ocorreu um erro na geolocalização: ", msg);
     };
 
     $scope.geolocation();
 
     $scope.showMapTweet = function(text, name, image, endereco) {
 
-      geocoder.geocode({'address': endereco}, function(results, status) {
+      geocoder.geocode({"address": endereco}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
 
             marcadorPersonalizado = new google.maps.Marker({
@@ -148,7 +139,7 @@ angular.module('twRealtime')
             map.setCenter(results[0].geometry.location.G, results[0].geometry.location.K);
 
         } else {
-          alert('Geocoder falhou por conta de: ' + status);
+          alert("Geocoder falhou por conta de: " + status);
         }
       });
 
@@ -162,12 +153,12 @@ angular.module('twRealtime')
       };
 
       if (!("Notification" in window)) {
-        alert('Seu navegador não suporta notificações.');
-      } else if (Notification.permission === 'granted') {
+        alert("Seu navegador não suporta notificações.");
+      } else if (Notification.permission === "granted") {
         notification = new Notification(title, options);
-      } else if (Notification.permission !== 'denied') {
+      } else if (Notification.permission !== "denied") {
         Notification.requestPermission(function(permission) {
-          if (permission === 'granted') {
+          if (permission === "granted") {
             notification = new Notification(title, options);
           }
         });
@@ -186,5 +177,14 @@ angular.module('twRealtime')
         $scope.feeds.push(data);
       });
     };
+  }
 
-  }]);
+  IndexCtrl.$inject = [
+    "$scope", 
+    "TwitterService"    
+  ];
+
+  angular
+    .module("twRealtime")
+    .controller("IndexCtrl", IndexCtrl);
+})();
