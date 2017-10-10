@@ -1,8 +1,9 @@
-var express = require('express');
-var app = require('express')();
-var http = require('http').Server(app);
-var Twit = require('twit');
-var io = require('socket.io')(http);
+// Imports
+var express = require("express");
+var app = require("express")();
+var http = require("http").Server(app);
+var Twit = require("twit");
+var io = require("socket.io")(http);
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
@@ -16,13 +17,18 @@ app.use(express.static(__dirname + '/public'));
 
 
 // Twitter
-var watchList = ['#jsdayrec', '#jsdayrecife', '#jsday', '#TwitterRealtime'];
+var watchList = [
+  "#jsdayrec", 
+  "#jsdayrecife", 
+  "#jsday", 
+  "#TwitterRealtime"
+];
 
 var T = new Twit({
-  consumer_key: 'z4ebhQjySYZcu5aIHUqKgPJiZ',
-  consumer_secret: '4kVt3glKRLd9dLHIKSi578s4aoZUfmyTwvfonIoXsajOpVWkzF',
-  access_token: '365489318-9syC9NODIhM5vAalAGTrz9W9THf8ToZ2Jmh6baty',
-  access_token_secret: 'OrGLZBFCgSjPqSdbU1LTsSsbKGfszRGyytEfJ9iVmo3q7'
+  consumer_key: "z4ebhQjySYZcu5aIHUqKgPJiZ",
+  consumer_secret: "4kVt3glKRLd9dLHIKSi578s4aoZUfmyTwvfonIoXsajOpVWkzF",
+  access_token: "365489318-9syC9NODIhM5vAalAGTrz9W9THf8ToZ2Jmh6baty",
+  access_token_secret: "OrGLZBFCgSjPqSdbU1LTsSsbKGfszRGyytEfJ9iVmo3q7"
 });
 
 
@@ -41,12 +47,10 @@ io.sockets.on('connection', function(socket) {
     };
 
     // se o tweet tiver localização
-    if(tweet.place)
+    if(tweet.place) {
       tweetJSON.endereco = tweet.place.full_name + ', ' + tweet.place.country;
+    }
 
     io.sockets.emit('stream', tweetJSON);
-    
-    console.log(tweet);
-    console.log(tweetJSON);
   });
 });
