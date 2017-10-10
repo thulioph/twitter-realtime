@@ -5,6 +5,7 @@ var http = require("http").Server(app);
 var Twit = require("twit");
 var io = require("socket.io")(http);
 
+// Server
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
@@ -31,19 +32,16 @@ var T = new Twit({
 
 // Socket
 io.sockets.on('connection', function(socket) {
-  console.log('Connected');
-
   var stream = T.stream('statuses/filter', { track: watchList });
 
   stream.on('tweet', function(tweet) {
-
     var tweetJSON = {
       text: tweet.text,
       name: tweet.user.screen_name,
       image: tweet.user.profile_image_url
     };
 
-    // se o tweet tiver localização
+    // if tweet has location
     if(tweet.place) {
       tweetJSON.endereco = tweet.place.full_name + ', ' + tweet.place.country;
     }
